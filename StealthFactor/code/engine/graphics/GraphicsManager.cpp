@@ -49,6 +49,9 @@ namespace engine
 				case sf::Event::KeyReleased:
 					input::Manager::getInstance().onKeyReleased(event.key);
 					break;
+
+				default:
+					break;
 				}
 			}
 		}

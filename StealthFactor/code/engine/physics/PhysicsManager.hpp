@@ -26,7 +26,7 @@ namespace engine
 
 			void update();
 
-			const dSpaceID getSpaceId() const;
+			dSpaceID getSpaceId() const;
 
 			std::set<dGeomID> getCollisionsWith(dGeomID object) const;
 

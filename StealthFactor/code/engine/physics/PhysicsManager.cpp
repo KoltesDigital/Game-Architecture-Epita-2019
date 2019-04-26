@@ -33,7 +33,7 @@ namespace engine
 			dSpaceCollide(spaceId, &frameCollisions, &Manager::nearCallback);
 		}
 
-		const dSpaceID Manager::getSpaceId() const
+		dSpaceID Manager::getSpaceId() const
 		{
 			return spaceId;
 		}

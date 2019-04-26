@@ -4,14 +4,24 @@
 
 ## Requirements
 
-Although the code should support multiple platforms, only a working code and precompiled libraries for Windows are given.
+Although the code should support multiple platforms, only precompiled libraries for Windows are given.
 
 1. [Visual Studio 2017](https://www.visualstudio.com/downloads/)
 2. [Premake 5](https://premake.github.io/download.html)
 
-To generate the solution files, execute:
+## Build
+
+### Windows
 
     premake5.exe vs2017
+
+Open _build\StealthFactor.sln_, choose your target, and build.
+
+### Linux
+
+    premake5 gmake
+    cd build
+    make config=release_linux64
 
 ## External dependencies
 

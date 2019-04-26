@@ -1,7 +1,16 @@
 #include <iostream>
-#include <windows.h>
 #include <cli.hpp>
 #include <engine/Engine.hpp>
+
+#if defined(PLATFORM_LINUX)
+#include <unistd.h>
+
+#elif defined(PLATFORM_WINDOWS)
+#include <windows.h>
+
+#else
+#error Unsupported platform
+#endif
 
 int main(int argc, const char **argv)
 {
@@ -15,7 +24,14 @@ int main(int argc, const char **argv)
 		.defaultValue("data")
 		.getValue();
 
-#ifdef PLATFORM_WINDOWS
+#if defined(PLATFORM_LINUX)
+	if (chdir(dataPath))
+	{
+		std::cerr << "Unable to set data directory." << std::endl;
+		return EXIT_FAILURE;
+	}
+
+#elif defined(PLATFORM_WINDOWS)
 	wchar_t wDataPath[4096];
 	MultiByteToWideChar(CP_ACP, 0, dataPath, -1, wDataPath, 4096);
 	if (!SetCurrentDirectory(wDataPath))
@@ -23,8 +39,6 @@ int main(int argc, const char **argv)
 		std::cerr << "Unable to set data directory." << std::endl;
 		return EXIT_FAILURE;
 	}
-#else
-#error Unsupported platform
 #endif
 
 	engine::Engine::getInstance().loadConfiguration();

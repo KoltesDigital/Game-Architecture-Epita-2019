@@ -1,5 +1,6 @@
 #include "engine/input/InputManager.hpp"
 
+#include <iterator>
 #include <engine/graphics/GraphicsManager.hpp>
 
 namespace engine
@@ -21,7 +22,7 @@ namespace engine
 			if (!graphics::Manager::getInstance().hasFocus())
 				return false;
 
-			return justPressedKeys.find(key) != std::cend(justPressedKeys);
+			return justPressedKeys.find(key) != std::end(justPressedKeys);
 		}
 
 		bool Manager::isKeyJustReleased(sf::Keyboard::Key key) const
@@ -29,7 +30,7 @@ namespace engine
 			if (!graphics::Manager::getInstance().hasFocus())
 				return false;
 
-			return justReleasedKeys.find(key) != std::cend(justReleasedKeys);
+			return justReleasedKeys.find(key) != std::end(justReleasedKeys);
 		}
 
 		void Manager::clear()

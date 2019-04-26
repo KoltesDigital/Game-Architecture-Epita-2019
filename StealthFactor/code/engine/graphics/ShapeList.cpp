@@ -1,5 +1,6 @@
 #include "ShapeList.hpp"
 
+#include <cstring>
 #include <iostream>
 #include <sstream>
 #include <pugixml/pugixml.hpp>

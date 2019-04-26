@@ -23,6 +23,8 @@ configurations {
 }
 
 platforms {
+	"Linux32",
+	"Linux64",
 	"Win32",
 	"Win64",
 }
@@ -45,6 +47,30 @@ filter "configurations:Release"
 	}
 	optimize "On"
 	runtime "Release"
+
+filter "platforms:Linux32"
+	architecture "x32"
+	debugdir "dep/linux/bin32"
+	defines {
+		"PLATFORM_LINUX",
+	}
+	libdirs {
+		"dep/linux/lib32",
+	}
+	system "Linux"
+	targetdir "bin32"
+
+filter "platforms:Linux64"
+	architecture "x64"
+	debugdir "dep/linux/bin64"
+	defines {
+		"PLATFORM_LINUX",
+	}
+	libdirs {
+		"dep/linux/lib64"
+	}
+	system "Linux"
+	targetdir "bin64"
 
 filter "platforms:Win32"
 	architecture "x32"
@@ -84,15 +110,26 @@ project "Engine"
 		"code",
 		"dep/include",
 	}
-	links {
-		"winmm",
-		"ws2_32",
-	}
 	location "build/Engine"
 	kind "ConsoleApp"
 	-- rtti "Off"
 
-	filter "configurations:Debug"
+	filter { "platforms:Linux*" }
+		links {
+			"ode",
+			"sfml-graphics",
+			"sfml-network",
+			"sfml-system",
+			"sfml-window",
+		}
+
+	filter { "platforms:Win*" }
+		links {
+			"winmm",
+			"ws2_32",
+		}
+
+	filter { "platforms:Win*", "configurations:Debug" }
 		links {
 			"ode_singled",
 			"sfml-graphics-d",
@@ -101,7 +138,7 @@ project "Engine"
 			"sfml-window-d",
 		}
 
-	filter "configurations:Release"
+	filter { "platforms:Win*", "configurations:Release" }
 		links {
 			"ode_single",
 			"sfml-graphics",
