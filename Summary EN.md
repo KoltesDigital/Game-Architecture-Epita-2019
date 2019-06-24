@@ -154,15 +154,33 @@ Other variations have subtle changes (MVD, MVVM, MVP...). However, the basic pri
 
 It is then possible to have multiple views of the same model. In this case, there may one or some controllers, depending on the model-view paradigm and whether the views are significantly different.
 
-## Unit tests
+## Testing (including Unit Tests)
 
-Unit tests is actually more about a programming methodology, where one would first write the specifications of their future modules. Because the specifications are eventually runnable, they can check whether they are fulfilled. Therefore, this programming style is deeper than just writing _a posteriori_ tests.
+The sooner a bug is avoided, the less it costs to the project. The compiler already avoids bugs (well, if it won't compile, it isn't even runnable). Then come automated tests, then "human" tests (e.g. run by testers in the quality assurance team), then... users. Bugs appearing at the end user side are the most expensive, they might ruin a brand image.
+
+Unit tests are automated tests on unit parts of the code or system. Any class should be accompanied by tests, which check all possible usages and their outcomes (_code coverage_).
+
+Integration tests are higher-level tests, integrate multiple modules or classes, and test that they work well together.
+
+During development, tests are run periodically to ensure that they still pass. Therefore, they are an essential security net. If a regression appears, tests shall catch it.
+
+Any test, whether automated or human-driven, should have the shape: given preconditions, when computations are executed, actual results happen. Writing multiple tests as a scenario could make them more readable.
+
+Be concrete with tests. For instance, when comparing values, use equality comparisons if possible. Because you know the preconditions, you know the expected results.
+
+As a consequence, modules dealing with randomness are really hard to test.
+
+Tests also serve as documentation, because they show how to use the modules, and these examples are guaranteed to always be up-to-date.
+
+It is best to automatize test executions. For instance, you can launch them every time someone commits to the repository. This will help to fix regressions as soon as they appear.
+
+Automatize tests as much as you can, even for other test types. For instance for a video game project, you can launch the game with a bot following a predefined path, in order to ensure that no obstacles appear, that no frame takes more time to render than allowed, etc.
+
+## Test-Driven Development (TDD)
+
+Writing automated tests is actually more about a programming methodology, where one would first write the specifications of their future modules. Because the specifications are eventually runnable, they can check whether they are fulfilled. Therefore, this programming style is deeper than just writing _a posteriori_ tests.
 
 These specifications act as contracts between the programmers and the customers. Always start by writing contracts, which forces to really think about the needs and settle them. Then, do your work and make sure the contracts are fulfiled. As simple as that.
-
-In any case, tests are an essential security net. If a regression appears, tests shall show it.
-
-It is best to automatize tests. For instance, you can launch them every time someone commits to the repository. This will help to fix regressions as soon as they appear.
 
 ## Metrics
 

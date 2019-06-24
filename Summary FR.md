@@ -154,15 +154,33 @@ D'autres variations ont des différences subtiles (MVD, MVVM, MVP...). Cependant
 
 Il est alors possibles d'avoir plusieurs vues pour le même modèle. Dans ce cas, il peut y avoir un ou plusieurs contrôleurs, en fonction du paradigme modèle-view et de si les vues sont significativement différentes.
 
-## Tests unitaires
+## Tests (dont tests unitaires)
+
+Plus vous évitez tôt un bug, moins il coûte au projet. Le compilateur évite déjà des bugs (en fait, si ça ne compile pas, ça n'est même aps lançable). Ensuite viennent les tests automatisés, ensuite les tests "humains" (e.g. exécuté par des testeurs dans l'équipe d'assurance qualité), ensuite... les utilisateurs. Les bugs apparaissant chez l'utilisateur final sont les plus coûteux, ils peuvent même ruiner une image de marque.
+
+Les tests unitaires sont des tests automatisés sur des parties unitaires du code ou système. Toute classe devrait être accompagniées de tests, qui vérifient tous les usages possibles et leur résultat (_code coverage_).
+
+Les tests d'integration sont des tests de plus haut niveau, qui intègrent plusieurs modules ou classes, et qui testent qu'elles marchent bien ensemble.
+
+Pendant le développement, les tests sont lancés régulièrement pour vérifier qu'ils passent toujours. Ainsi, les tests sont un filet de sûreté essentiel. Si une régression apparaît, les tests se doivent de le montrer.
+
+Un test, qu'il soit automatisé ou exécuté par une personne, doivent avoir la forme : étant donné des préconditions, quand des opérations sont exécutées, des résultats concrets se passent. Ecrire plusieurs tests sous la forme d'un scénario peut les rendre plus lisibles.
+
+Soyez concrets dans vos tests. Par exemple, pour comparer des valeurls, utiliser des égalités si possible. Puisque vous connaissez les préconditions, vous connaissez les résultats attendus.
+
+En conséquence, les modules faisant intervenir le hasard sont très difficile à tester.
+
+Les tests servent aussi de documentation, puisqu'ils montrent comment utiliser les modules, et ces exemples sont garantis de toujours être à jour.
+
+C'est une bonne idée d'automatiser le lancement des tests. Par exemple, vous pouvez lancer les tests à chaque fois que quelqu'un commit sur le repository. Ca aide à corriger les erreurs dès qu'elles apparaissent.
+
+Automatisez le plus possible, même pour d'autres types de test. Par exemple pour un projet de jeu vidéo, vous pouvez lancer le jeu avec un bot qui suit un chemin prédéterminé, afin de garantir qu'aucun obstacle n'apparaît, qu'aucune frame ne prend plus de temps à rendre qu'autorisé, etc.
+
+## Test-Driven Development (TDD)
 
 Les tests unitaires sont en fait une méthodologie de programmation, où l'on commence par écrire les spécifications de ses futures modules. Il se trouve que les spécifications sont executables, donc on peut s'assurer que les spécifications sont bien remplies. Ainsi, cette façon de programmer est bien plus profonde que d'écrire des tests après avoir implémenté des fonctions.
 
 Ces spécifications servent de contrats entre les programmeurs et les clients. Commencez toujours par écrire des contrats, ce qui oblige à vraiment réfléchir aux besoins et à les fixer. Ensuite, faites votre travail et assurez-vous de satisfaire les contrats. C'est aussi simple que ça.
-
-Dans tous les cas, les tests sont un filet de sûreté essentiel. Si une régression apparaît, les tests se doivent de le montrer.
-
-Le mieux est d'automatiser les tests. Par exemple, vous pouvez les lancer à chaque _commit_ sur le _repository_. Cela aidera à réparer les régressions dès qu'elles apparaîssent.
 
 ## Métriques
 
